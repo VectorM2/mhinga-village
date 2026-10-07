@@ -1,0 +1,252 @@
+import type { Service } from "@/lib/types";
+import { localVerified, nationalSource, TO_CONFIRM, VERIFIED_SETUP } from "./verification";
+
+/**
+ * Services directory.
+ * Local facilities use placeholder names until an administrator confirms the
+ * real name, phone number and hours. National helplines list their public
+ * numbers but remain "unverified" until an administrator confirms them.
+ */
+export const services: Service[] = [
+  /* ---------- Health: local ---------- */
+  {
+    id: "svc-mhinga-clinic",
+    slug: "mhinga-clinic",
+    name: "Mhinga Clinic",
+    category: "health",
+    subcategory: "Clinics",
+    summary: "Primary healthcare for the Mhinga community: check-ups, immunisation, chronic medication and family planning.",
+    description:
+      "Public clinics provide free primary healthcare services. Services usually include child immunisation, antenatal care, chronic medication collection, HIV and TB testing, and family planning. Mhinga Clinic is right next to the main road towards Kruger National Park, beside the special needs school. Operating hours and the clinic phone number will be added once confirmed.",
+    location: { label: "Next to the main road towards Kruger National Park, beside the special needs school" },
+    contact: {},
+    hours: "Operating hours to be confirmed",
+    scope: "local",
+    tags: ["clinic", "primary healthcare", "immunisation", "chronic medication", "Mhinga Clinic"],
+    verification: localVerified("Name and location confirmed by community administrator"),
+  },
+  {
+    id: "svc-mobile-clinic",
+    slug: "mobile-clinic",
+    name: "Mobile Clinic Visits",
+    category: "health",
+    subcategory: "Clinics",
+    summary: "Schedule for mobile clinic visits to outlying sections of the village.",
+    description:
+      "Mobile clinics bring basic health services closer to residents who live far from a fixed clinic. The visiting schedule for Mhinga will be posted here and in Community Notices once confirmed by the local health facility.",
+    location: { label: "Various points in Mhinga — schedule to be confirmed" },
+    contact: {},
+    hours: "Visit schedule to be confirmed",
+    scope: "local",
+    tags: ["mobile clinic", "outreach"],
+    verification: TO_CONFIRM,
+  },
+  {
+    id: "svc-malamulele-hospital",
+    slug: "malamulele-hospital",
+    name: "Malamulele Hospital",
+    category: "health",
+    subcategory: "Hospitals",
+    summary: "Public district hospital in Malamulele serving the surrounding villages, including referrals from local clinics.",
+    description:
+      "District hospitals accept patients referred from clinics as well as emergencies. Bring your ID, clinic card and any referral letter. Phone number, visiting hours and the services offered should be confirmed with the hospital before travelling.",
+    location: { label: "Malamulele" },
+    contact: {},
+    hours: "Emergency unit: 24 hours (to be confirmed) · Visiting hours to be confirmed",
+    scope: "regional",
+    tags: ["hospital", "referral", "emergency unit"],
+    verification: localVerified("Confirmed by community administrator"),
+  },
+  {
+    id: "svc-pharmacy",
+    slug: "pharmacy",
+    name: "Pharmacies & Medicine Collection Points",
+    category: "health",
+    subcategory: "Pharmacies",
+    summary: "Where to collect chronic medication and buy over-the-counter medicine near Mhinga.",
+    description:
+      "Many patients on chronic medication can collect their medicine at a pick-up point closer to home through the national Central Chronic Medicines Dispensing and Distribution (CCMDD) programme. Ask your clinic whether you qualify. Local pharmacy listings will be added once confirmed.",
+    location: { label: "To be confirmed" },
+    contact: {},
+    scope: "local",
+    tags: ["pharmacy", "chronic medication", "CCMDD"],
+    verification: TO_CONFIRM,
+  },
+  {
+    id: "svc-maternal-health",
+    slug: "maternal-health",
+    name: "Maternal & Child Health",
+    category: "health",
+    subcategory: "Maternal & child health",
+    summary: "Antenatal visits, safe delivery, postnatal care, immunisation and growth monitoring for babies and children.",
+    description:
+      "Pregnant women should start antenatal care as early as possible — ideally before 20 weeks. Clinics provide antenatal check-ups, HIV testing and prevention of mother-to-child transmission, and after birth, immunisation and growth monitoring using the Road-to-Health booklet. The national MomConnect service sends free health messages to pregnant women and new mothers who register at a clinic.",
+    location: { label: "At your nearest clinic" },
+    contact: {},
+    scope: "national",
+    tags: ["pregnancy", "antenatal", "baby", "immunisation", "MomConnect"],
+    verification: nationalSource("National Department of Health programmes", "https://www.health.gov.za"),
+  },
+  {
+    id: "svc-mental-health",
+    slug: "mental-health-support",
+    name: "SADAG Mental Health Helpline",
+    category: "support",
+    subcategory: "Mental health",
+    summary: "Free, confidential support for depression, anxiety, stress, substance use and suicidal thoughts.",
+    description:
+      "The South African Depression and Anxiety Group (SADAG) runs free helplines staffed by trained counsellors who can talk, listen and refer you to help near you. You do not need to be in crisis to call.",
+    contact: { phone: "0800 567 567", website: "https://www.sadag.org" },
+    hours: "Helpline hours: confirm on the SADAG website",
+    scope: "national",
+    tags: ["mental health", "depression", "anxiety", "counselling"],
+    verification: nationalSource("SADAG", "https://www.sadag.org"),
+  },
+  {
+    id: "svc-gbv",
+    slug: "gbv-command-centre",
+    name: "GBV Command Centre",
+    category: "support",
+    subcategory: "Gender-based violence",
+    summary: "24-hour national support line for anyone affected by gender-based violence.",
+    description:
+      "Trained social workers provide counselling and can connect you with police, shelters and medical help. If you are in immediate danger, call the police on 10111.",
+    contact: { phone: "0800 428 428", website: "https://gbvcommandcentre.org.za" },
+    hours: "24 hours",
+    scope: "national",
+    tags: ["GBV", "abuse", "violence", "counselling", "shelter"],
+    verification: localVerified("Confirmed by community administrator — national 24-hour line"),
+  },
+  {
+    id: "svc-childline",
+    slug: "childline",
+    name: "Childline South Africa",
+    category: "support",
+    subcategory: "Child protection",
+    summary: "Free helpline for children and anyone worried about a child's safety.",
+    description:
+      "Children can call for free to talk about abuse, bullying, family problems or anything worrying them. Adults can also call to report concerns about a child.",
+    contact: { phone: "116", website: "https://www.childlinesa.org.za" },
+    hours: "24 hours",
+    scope: "national",
+    tags: ["children", "abuse", "child protection"],
+    verification: nationalSource("Childline South Africa", "https://www.childlinesa.org.za"),
+  },
+
+  /* ---------- Emergency ---------- */
+  {
+    id: "svc-ems",
+    slug: "ambulance-ems",
+    name: "Ambulance / Emergency Medical Services",
+    category: "emergency",
+    subcategory: "Ambulance",
+    summary: "Call 10177 for medical emergencies. From any cellphone you can also call 112.",
+    description:
+      "When you call, stay calm and give: your name, the exact location (section, nearest landmark, school or shop), what happened, and how many people need help. Keep your phone on so the ambulance can call you back. Send someone to the main road to guide the ambulance if possible.",
+    contact: { phone: "10177" },
+    hours: "24 hours",
+    scope: "national",
+    tags: ["ambulance", "emergency", "EMS"],
+    verification: VERIFIED_SETUP,
+  },
+  {
+    id: "svc-police",
+    slug: "police",
+    name: "South African Police Service (SAPS)",
+    category: "safety",
+    subcategory: "Police",
+    summary: "Call 10111 to report a crime in progress or any situation where someone is in danger.",
+    description:
+      "For non-emergencies such as affidavits, certified copies or opening a case, visit the police station that serves Mhinga. The station name, address and direct number will be added once confirmed. Crime Stop (08600 10111) accepts anonymous tip-offs.",
+    contact: { phone: "10111", website: "https://www.saps.gov.za" },
+    hours: "24 hours",
+    scope: "national",
+    tags: ["police", "crime", "affidavit"],
+    verification: VERIFIED_SETUP,
+  },
+
+  /* ---------- Government & social ---------- */
+  {
+    id: "svc-sassa",
+    slug: "sassa",
+    name: "SASSA — Social Grants",
+    category: "government",
+    subcategory: "Social grants",
+    summary: "Apply for and manage child support, older person's, disability and other social grants.",
+    description:
+      "The South African Social Security Agency (SASSA) administers social grants. Applications are free — never pay anyone to apply for a grant on your behalf. See the How-to guide for documents you need.",
+    contact: { phone: "0800 60 10 11", website: "https://www.sassa.gov.za" },
+    scope: "national",
+    tags: ["SASSA", "grant", "child support", "pension", "disability"],
+    verification: localVerified("Confirmed by community administrator", "https://www.sassa.gov.za"),
+  },
+  {
+    id: "svc-home-affairs",
+    slug: "home-affairs",
+    name: "Home Affairs — IDs & Birth Certificates",
+    category: "government",
+    subcategory: "Civic services",
+    summary: "Birth registration, smart ID cards, passports and other civic documents.",
+    description:
+      "Register a baby's birth within 30 days at a Home Affairs office or a hospital with an on-site Home Affairs service. The nearest office serving Mhinga and its hours will be listed here once confirmed.",
+    location: { label: "Nearest office to be confirmed" },
+    contact: { website: "https://www.dha.gov.za" },
+    scope: "national",
+    tags: ["ID", "birth certificate", "passport", "Home Affairs"],
+    verification: nationalSource("Department of Home Affairs", "https://www.dha.gov.za"),
+  },
+  {
+    id: "svc-municipality",
+    slug: "collins-chabane-municipality",
+    name: "Collins Chabane Local Municipality",
+    category: "municipal",
+    subcategory: "Local government",
+    summary: "The local municipality responsible for municipal services in Mhinga (Ward 31). Its seat is in Malamulele.",
+    description:
+      "Municipal services include roads, waste, some water and electricity functions, and housing support. In Vhembe, water services may be handled by the district municipality — confirm which office to contact for your issue. Official contact numbers will be listed once confirmed.",
+    location: { label: "Malamulele (municipal seat)" },
+    contact: {},
+    scope: "regional",
+    tags: ["municipality", "ward councillor", "municipal services"],
+    verification: localVerified("Municipality and ward confirmed by community administrator — office phone numbers to be added"),
+  },
+  {
+    id: "svc-traditional-authority",
+    slug: "traditional-authority",
+    name: "Mhinga Traditional Authority",
+    category: "government",
+    subcategory: "Traditional leadership",
+    summary: "Traditional leadership for the Mhinga area, led by Hosi Shilungwa Mhinga II.",
+    description:
+      "The Mhinga Traditional Authority is led by Hosi Shilungwa Mhinga II. Its area of jurisdiction covers approximately 20,000 hectares and includes 10 villages, among them Mhinga 1, 2 and 3, Botsoleni, Maphophe, Ka-Matiani, Joseph, Mabililigwe, Makuleke and Nthlaveni. The area falls within Collins Chabane Local Municipality (Ward 31). The Traditional Authority plays a role in customary land allocation, community gatherings and dispute resolution. The office is close to Mhinga Primary School and near the EPCSA Mission Station in Mhinga Zone 2.",
+    location: { label: "Mhinga Zone 2 — near Mhinga Primary School and the EPCSA Mission Station" },
+    contact: {},
+    hours: "Office hours to be confirmed",
+    scope: "local",
+    tags: ["traditional authority", "Hosi", "Mhinga II", "land", "community", "Ward 31"],
+    verification: localVerified("Confirmed by community administrator; Office of the Premier, Limpopo", "https://x.com/OtpLimpopo/status/1839666604067709264"),
+  },
+  {
+    id: "svc-ward-councillor",
+    slug: "ward-councillor",
+    name: "Ward Councillor",
+    category: "municipal",
+    subcategory: "Local government",
+    summary: "Mhinga falls under Ward 31 of Collins Chabane Local Municipality. Raise service problems with your ward councillor and at ward meetings.",
+    description:
+      "Ward councillors chair ward committee meetings and take community issues to the municipality. Mhinga is in Ward 31. The councillor's name and contact details will be listed once confirmed.",
+    contact: {},
+    scope: "local",
+    tags: ["ward councillor", "ward committee"],
+    verification: TO_CONFIRM,
+  },
+];
+
+export const serviceCategoryMeta: Record<Service["category"], { label: string; description: string }> = {
+  health: { label: "Health", description: "Clinics, hospitals, pharmacies and maternal health" },
+  emergency: { label: "Emergency", description: "Ambulance and emergency response" },
+  support: { label: "Support & Counselling", description: "Mental health, GBV and child protection" },
+  government: { label: "Government & Social", description: "Grants, IDs and traditional leadership" },
+  municipal: { label: "Municipal", description: "Your municipality and ward councillor" },
+  safety: { label: "Safety", description: "Police and community safety" },
+};
