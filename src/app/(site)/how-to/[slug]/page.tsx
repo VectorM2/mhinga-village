@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ChevronDown, ExternalLink, Phone } from "lucide-react";
 import { GuideCard } from "@/components/cards/misc-cards";
 import { ShareButtons } from "@/components/shared/client";
+import { ApplyOnlineLink } from "@/components/shared/apply-online";
 import { CheckList, ProseSection } from "@/components/shared/detail";
 import { Icon } from "@/components/shared/icon";
 import { Breadcrumbs } from "@/components/shared/page-header";
@@ -59,6 +60,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                 <VerifiedBadge verification={guide.verification} />
                 <span>Last updated {formatDate(guide.updatedAt)}</span>
               </div>
+              {guide.slug === "apply-for-land" && <ApplyOnlineLink className="mt-6" />}
             </div>
           </div>
         </div>
@@ -119,6 +121,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           </ProseSection>
           <ProseSection id="where" title="Where to apply">
             <CheckList items={guide.whereToApply} empty="See the steps above." />
+            {guide.slug === "apply-for-land" && <ApplyOnlineLink className="mt-5" />}
           </ProseSection>
           <ProseSection id="contacts" title="Contact information">
             {guide.contacts.length ? (

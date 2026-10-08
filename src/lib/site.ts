@@ -16,6 +16,12 @@ export const siteConfig = {
   isOfficial: false,
   contactEmail: "hello@mhinga.co.za",
   /**
+   * The Traditional Authority Management System (TAMS), where residents
+   * create an account and apply for land online. Set NEXT_PUBLIC_TAMS_URL to
+   * the deployed TAMS address (e.g. https://tams.netlify.app).
+   */
+  tamsUrl: (process.env.NEXT_PUBLIC_TAMS_URL ?? "http://localhost:5173").replace(/\/+$/, ""),
+  /**
    * Map settings. Set `center` once the village coordinates are confirmed —
    * the Explore page then renders a live OpenStreetMap embed (no API key).
    * Mapbox / Google Maps can be added in src/components/shared/map-view.tsx.
@@ -31,6 +37,9 @@ export const siteConfig = {
     instagram: "",
   },
 } as const;
+
+/** TAMS resident sign-up — the first step of applying for land online. */
+export const tamsRegisterUrl = `${siteConfig.tamsUrl}/register`;
 
 /**
  * Single place to swap illustrated placeholders for real photography.

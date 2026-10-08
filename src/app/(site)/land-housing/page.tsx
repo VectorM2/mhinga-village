@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Building2, ChevronDown, FileText, Landmark, Users } from "lucide-react";
+import { ApplyOnlineLink } from "@/components/shared/apply-online";
 import { CheckList } from "@/components/shared/detail";
 import { PageHeader } from "@/components/shared/page-header";
 import { Section, SectionHeading } from "@/components/shared/section";
@@ -32,9 +33,12 @@ export default function LandHousingPage() {
         crumbs={[{ label: "Services", href: "/services" }, { label: "Land & Housing" }]}
         image={images.village}
       >
-        <Link href="/how-to/apply-for-land" className="inline-flex h-12 items-center gap-2 rounded-full bg-amber-gold-400 px-6 font-semibold text-charcoal-900 hover:bg-amber-gold-500">
-          How to apply for land <ArrowRight className="size-4" aria-hidden />
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/how-to/apply-for-land" className="inline-flex h-12 items-center gap-2 rounded-full bg-amber-gold-400 px-6 font-semibold text-charcoal-900 hover:bg-amber-gold-500">
+            How to apply for land <ArrowRight className="size-4" aria-hidden />
+          </Link>
+          <ApplyOnlineLink tone="light" />
+        </div>
       </PageHeader>
 
       <Section>
@@ -111,6 +115,11 @@ export default function LandHousingPage() {
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
             <h2 className="mb-4 text-2xl font-semibold">Where to apply & important contacts</h2>
+            <div className="mb-4 rounded-2xl bg-bush-50 p-5 ring-1 ring-bush-100">
+              <p className="font-semibold text-ink">Apply online through TAMS</p>
+              <p className="mt-1 text-sm text-charcoal-700">Create a resident account on the Traditional Authority Management System to apply for a site and follow your application.</p>
+              <ApplyOnlineLink className="mt-4" />
+            </div>
             <ul className="space-y-3">
               {[
                 ["Mhinga Traditional Authority — Hosi Shilungwa Mhinga II", "Mhinga Zone 2, near the EPCSA Mission Station · office hours to be confirmed", "/services/traditional-authority"],
