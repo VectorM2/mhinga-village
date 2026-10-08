@@ -1,3 +1,4 @@
+import { tamsRegisterUrl } from "@/lib/site";
 import type { HowToGuide } from "@/lib/types";
 import { nationalSource, TO_CONFIRM } from "./verification";
 
@@ -33,7 +34,7 @@ export const howToGuides: HowToGuide[] = [
     ],
     whereToApply: ["Mhinga Traditional Authority (Hosi Shilungwa Mhinga II) — Mhinga Zone 2, near the EPCSA Mission Station; office hours to be confirmed", "Collins Chabane Local Municipality (Ward 31) housing office — contact to be confirmed"],
     contacts: [{ label: "Traditional Council", value: "Information to be confirmed" }, { label: "Municipal housing office", value: "Information to be confirmed" }],
-    officialLinks: [],
+    officialLinks: [{ label: "Apply for land online — create a TAMS resident account", url: tamsRegisterUrl }],
     faqs: [
       { q: "Do I have to pay to apply for land?", a: "Fees, if any, must be confirmed with the Traditional Council or municipality. Always ask for an official receipt for any payment." },
       { q: "Can a woman apply for land in her own name?", a: "South Africa's Constitution prohibits unfair discrimination based on gender. Ask the authority about the process and request written reasons if you are refused." },
